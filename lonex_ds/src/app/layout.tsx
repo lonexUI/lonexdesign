@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, Geist, Geist_Mono } from "next/font/google";
+import { DM_Mono, DM_Sans, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Nav from "./components/nav/nav";
 import { ThemeProvider } from "next-themes";
@@ -17,7 +17,14 @@ const dmSans = DM_Sans({
   variable: "--font-dm-sans",
   subsets: ["latin"],
   weight: ["400", "500", "700"]
-})
+});
+
+const dmMono = DM_Mono({
+  variable: "--font-dm-mono",
+  subsets: ["latin"],
+  weight: ["400", "500"]
+});
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -32,7 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${dmSans.variable}`}
+        className={`${geistSans.variable} ${geistMono.variable} ${dmSans.variable} ${dmMono.variable}`}
       >
         <Nav />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
