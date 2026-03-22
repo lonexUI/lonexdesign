@@ -1,16 +1,18 @@
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --box: #1a1a1a;
-    --border: #333333;
+    --background: hsl(0, 0%, 5%);
+    --foreground: hsl(0, 0%, 95%);
+    --box: hsl(0, 0%, 10%);
+    --border: hsl(0, 0%, 20%);
+    --text-muted: hsl(0, 0%, 60%);
   }
 }
 
 .light {
-  --background: #ffffff;
-  --foreground: #000000;
-  --box: #f0f0f0;
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(0, 0%, 5%);
+  --box: hsl(0, 0%, 95%);
+  --text-muted: hsl(0, 0%, 40%);
 }
 
 html,
@@ -45,4 +47,25 @@ a {
   border-radius: 8px;
   margin-top: 20px;
   width: fit-content;
+}
+
+h1.hero_heading {
+  font-size: 4.5rem;
+  font-weight: bold;
+  font-family: var(--font-dm-mono);
+  color: var(--foreground);
+  position: relative;
+  width: fit-content;
+}
+
+h1.hero_heading::after {
+  content: "↱ design system";
+  font-size: 1rem;
+  font-weight: normal;
+  font-family: var(--font-dm-mono);
+  color: var(--text-muted);
+
+  position: absolute;
+  right: -35%;
+  top: 5%;
 }

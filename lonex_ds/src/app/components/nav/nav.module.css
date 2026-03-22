@@ -2,22 +2,28 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 20px;
+    padding: 20px;
     background-color: var(--box);
     border-bottom: 1px solid var(--border);
 }
 
 .nav .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
+    font-size: 1rem;
+    /* font-weight: bold; */
+    font-family: var(--font-dm-mono);
     color: var(--foreground);
 }
 
 .nav .menu {
     display: flex;
-    gap: 15px;
+    gap: 25px;
 }
 
 .nav .menu li {
     list-style: none;
+}
+
+.nav .menu li a {
+    color: var(--text-muted);
+    font-weight: 500;
 }

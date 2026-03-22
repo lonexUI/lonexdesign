@@ -3,7 +3,7 @@ import styles from "./nav.module.css";
 
 const Nav: React.FC = () => (
     <nav className={styles.nav}>
-        <div className={styles.logo}>MySite</div>
+        <div className={styles.logo}>lonex_ds</div>
         <ul className={styles.menu}>
             <li>
                 <Link href="/">Home</Link>
