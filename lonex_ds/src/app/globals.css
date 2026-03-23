@@ -28,6 +28,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  height: 100vh;
 }
 
 * {
@@ -56,7 +57,21 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 10rem;
+  margin-top: 7.5rem;
+  position: relative;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+  z-index: -1;
+  /* Puts the glow behind the text */
 }
 
 .hero p {
@@ -64,15 +79,11 @@ a {
 }
 
 h1.hero_heading {
-  font-size: 4.5rem;
+  font-size: 72px;
   font-weight: bold;
   font-family: var(--font-dm-mono);
   position: relative;
   width: fit-content;
-  background: linear-gradient(90deg, var(--foreground) 0%, var(--primary) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 h1.hero_heading::after {
@@ -80,7 +91,7 @@ h1.hero_heading::after {
   font-size: 1rem;
   font-weight: normal;
   font-family: var(--font-dm-mono);
-  -webkit-text-fill-color: var(--text-muted);
+  color: var(--text-muted);
 
   position: absolute;
   right: -35%;
@@ -97,12 +108,18 @@ h1.hero_heading::after {
   background-color: var(--foreground);
   color: var(--background);
   border: 1px solid var(--border);
-  padding: 10px 20px;
-  border-radius: 5px;
+  padding: 12px 28px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
   font-weight: 500;
 }
+
 
 .hero .cta-row a.btn.btn-secondary {
   background-color: transparent;
   color: var(--foreground);
+}
+
+.hero .cta-row a.btn:hover {
+  transform: translateY(-2px);
 }
