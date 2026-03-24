@@ -75,6 +75,22 @@ export default function Home() {
         </div>
 
       </div>
+      <div className="terminal">
+        <div className="terminal-header">
+          <div className="dot dot-red"></div>
+          <div className="dot dot-yellow"></div>
+          <div className="dot dot-green"></div>
+        </div>
+        <div className="terminal-body">
+          <code>
+            <span style={{ color: '#71717a' }}>$</span>
+            <span className="command">npm install</span> lonex-ds
+          </code>
+          <Link href="#" className="copy-btn">
+            Copy
+          </Link>
+        </div>
+      </div>
       <ThemeToggle />
     </div>
   );

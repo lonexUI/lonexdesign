@@ -393,3 +393,69 @@ p {
   right: 4px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
+
+/* terminal */
+.terminal {
+  max-width: 956px;
+  margin: 100px auto;
+  background: hsl(240, 10%, 5%);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.terminal-header {
+  background-color: hsl(240, 5%, 10%);
+  padding: 10px 16px;
+  display: flex;
+  gap: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dot-red {
+  background-color: #ef4444;
+}
+
+.dot-yellow {
+  background-color: #fbbf24;
+}
+
+.dot-green {
+  background-color: #34d399;
+}
+
+.terminal-body {
+  padding: 24px;
+  font-family: var(--font-dm-mono);
+  font-size: 14px;
+  color: #e4e4e7;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.command {
+  color: var(--primary);
+}
+
+.copy-btn {
+  background: #27272a;
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  transition: all 0.1s ease;
+}
+
+.copy-btn:hover {
+  background: #3b82f6;
+  color: #ffffff;
+  border-color: #3b82f6;
+}
