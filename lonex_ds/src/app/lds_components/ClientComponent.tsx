@@ -3,42 +3,78 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import styles from "./componentsLibrary.module.css";
+import { PropOption } from "@/lib/parseProps";
 
-export default function ClientComponent() {
-    const [activeVariant, setActiveVariant] = useState("Primary");
-    const options = ['Primary', 'Secondary', 'Ghost'];
+interface ClientComponentProps {
+    propOptions: PropOption[];
+}
+
+export default function ClientComponent({ propOptions }: ClientComponentProps) {
+    const [selectedValues, setSelectedValues] = useState<Record<string, string>>({});
+    const [toggledProps, setToggledProps] = useState<Record<string, boolean>>({});
+
+    const handleSelectChange = (propName: string, value: string) => {
+        setSelectedValues((prev) => ({
+            ...prev,
+            [propName]: value,
+        }));
+    };
+
+    const handleToggle = (propName: string) => {
+        setToggledProps((prev) => ({
+            ...prev,
+            [propName]: !prev[propName],
+        }));
+    };
 
     return (
         <>
-            <div className={styles.propertyGroup}>
-                <label className={styles.propertyLabel}>Variant</label>
-                <div className={styles.segmentedControl}>
-                    {options.map((opt) => (
-                        <button
-                            key={opt}
-                            onClick={() => setActiveVariant(opt)}
-                            className={`${styles.segmentBtn} ${activeVariant === opt ? styles.activeText : ''}`}
-                        >
-                            {activeVariant === opt && (
-                                <motion.div
-                                    layoutId="active-pill"
-                                    className={styles.activeBackground}
-                                    transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                                />
-                            )}
-                            <span className={styles.btnLabel}>{opt}</span>
-                        </button>
-                    ))}
-                </div>
-            </div>
+            {propOptions.map((option) => (
+                <div key={option.name}>
+                    {option.type === "select" && (
+                        <div className={styles.propertyGroup}>
+                            <label className={styles.propertyLabel}>
+                                {option.name.charAt(0).toUpperCase() + option.name.slice(1)}
+                            </label>
+                            <div className={styles.segmentedControl}>
+                                {option.values?.map((val) => (
+                                    <button
+                                        key={`${option.name}-${val}`}
+                                        onClick={() => handleSelectChange(option.name, val)}
+                                        className={`${styles.segmentBtn} ${selectedValues[option.name] === val ? styles.activeText : ""
+                                            }`}
+                                    >
+                                        {selectedValues[option.name] === val && (
+                                            <motion.div
+                                                layoutId={`active-pill-${option.name}`}
+                                                className={styles.activeBackground}
+                                                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                            />
+                                        )}
+                                        <span className={styles.btnLabel}>{val}</span>
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    )}
 
-            <div className={styles.propertyGroupInline}>
-                <label className={styles.propertyLabel}>Disabled</label>
-                <label className={styles.switch}>
-                    <input type="checkbox" />
-                    <span className={styles.slider}></span>
-                </label>
-            </div>
+                    {option.type === "toggle" && (
+                        <div className={styles.propertyGroupInline}>
+                            <label className={styles.propertyLabel}>
+                                {option.name.charAt(0).toUpperCase() + option.name.slice(1)}
+                            </label>
+                            <label className={styles.switch}>
+                                <input
+                                    type="checkbox"
+                                    checked={toggledProps[option.name] || false}
+                                    onChange={() => handleToggle(option.name)}
+                                />
+                                <span className={styles.slider}></span>
+                            </label>
+                        </div>
+                    )}
+                </div>
+            ))}
         </>
     );
 }

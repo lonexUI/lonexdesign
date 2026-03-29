@@ -1,9 +1,11 @@
 import styles from "./componentsLibrary.module.css";
 import { fetchComponent } from "@/lib/fetchComponents";
+import { parseComponentProps } from "@/lib/parseProps";
 import ClientComponent from "./ClientComponent";
 
 export default async function componentsLibrary() {
     const componentData = await fetchComponent("btn");
+    const propOptions = parseComponentProps(componentData.props);
 
     return (
         <main>
@@ -46,10 +48,7 @@ export default async function componentsLibrary() {
                 </main>
                 <aside className={[styles.sidebar, styles.controls].join(" ")}>
                     <h3>Properties</h3>
-                    <div className={styles.propertyGroup}>
-                        <pre className={styles.propsDisplay}>{componentData.props}</pre>
-                    </div>
-                    <ClientComponent />
+                    <ClientComponent propOptions={propOptions} />
                 </aside>
             </div>
         </main>

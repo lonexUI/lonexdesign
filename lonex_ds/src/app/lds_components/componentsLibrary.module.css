@@ -58,6 +58,10 @@
     align-items: center;
 }
 
+.breadcrumb .breadcrumbItem {
+    text-transform: capitalize;
+}
+
 .breadcrumb .breadcrumbItem:not(:last-child):after {
     content: ">";
     font-size: 10px;
@@ -171,6 +175,7 @@
 .btnLabel {
     position: relative;
     z-index: 2;
+    text-transform: capitalize;
 }
 
 .activeBackground {
