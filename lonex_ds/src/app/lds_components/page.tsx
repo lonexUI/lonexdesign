@@ -4,7 +4,7 @@ import { parseComponentProps } from "@/lib/parseProps";
 import ClientComponent from "./ClientComponent";
 
 export default async function componentsLibrary() {
-    const componentData = await fetchComponent("btn");
+    const componentData = await fetchComponent("alert");
     const propOptions = parseComponentProps(componentData.props);
 
     return (
