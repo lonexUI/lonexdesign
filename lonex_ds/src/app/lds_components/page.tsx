@@ -6,8 +6,9 @@ import * as Components from "../components";
 
 // Define a registry of components linked to CMS names
 const components: Record<string, React.ComponentType<any>> = {
-    "alert": Components.Btn, // Map CMS component names to React components
+    "button": Components.Btn,
     "btn": Components.Btn,
+    "alert": Components.Alert, // Map CMS component names to React components
     // Add more mappings as needed, e.g., "card": Components.Card
 };
 
