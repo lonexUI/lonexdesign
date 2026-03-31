@@ -2,10 +2,21 @@ import styles from "./componentsLibrary.module.css";
 import { fetchComponent } from "@/lib/fetchComponents";
 import { parseComponentProps } from "@/lib/parseProps";
 import ClientComponent from "./ClientComponent";
+import * as Components from "../components";
+
+// Define a registry of components linked to CMS names
+const components: Record<string, React.ComponentType<any>> = {
+    "alert": Components.Btn, // Map CMS component names to React components
+    "btn": Components.Btn,
+    // Add more mappings as needed, e.g., "card": Components.Card
+};
 
 export default async function componentsLibrary() {
     const componentData = await fetchComponent("alert");
     const propOptions = parseComponentProps(componentData.props);
+
+    // Get the component from the registry
+    const Component = components[componentData.name.toLowerCase()]; // Assuming name is case-insensitive
 
     return (
         <main>
@@ -37,7 +48,7 @@ export default async function componentsLibrary() {
                     </section>
                     <section className={styles.previewStage}>
                         <div className="canvas">
-                            <button className="btn">Button</button>
+                            {Component ? <Component /> : <div>Component not found</div>}
                         </div>
                     </section>
                     <section className={styles.codePreview}>
