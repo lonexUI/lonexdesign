@@ -38,29 +38,15 @@ export function parseComponentProps(propsString: string): PropOption[] {
                     default: defaultValue,
                 });
             } else {
-                // Otherwise treat as select with pipe-separated values
-                const values = valueStr.split("|").map((v) => v.trim());
-                let defaultValue: string | undefined;
-
-                // Check for default:value syntax
-                const defaultIndex = values.findIndex((v) => v.startsWith("default:"));
-                if (defaultIndex !== -1) {
-                    defaultValue = values[defaultIndex].split(":")[1];
-                    values.splice(defaultIndex, 1); // Remove default from values array
-
-                    // Validate that default is one of the remaining values
-                    if (!values.includes(defaultValue)) {
-                        console.warn(`Default value "${defaultValue}" for prop "${key}" is not in the available values: [${values.join(", ")}]`);
-                        defaultValue = undefined; // Reset if invalid
-                    }
-                }
+                // Otherwise treat as select with pipe-separated values and use the first value as default
+                const values = valueStr.split("|").map((v) => v.trim()).filter(Boolean);
 
                 if (values.length > 0) {
                     options.push({
                         name: key,
                         type: "select",
                         values,
-                        default: defaultValue || values[0], // Use first value as fallback default
+                        default: values[0],
                     });
                 }
             }
