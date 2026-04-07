@@ -1,6 +1,5 @@
 "use client";
 
-import { style } from 'framer-motion/client';
 import styles from './components.module.css';
 interface BtnProps {
     variant?: 'primary' | 'secondary' | 'tretiary';
