@@ -42,9 +42,25 @@
 .alert {
     padding: 15px;
     border-radius: 10px;
+    transition: .5s ease;
+}
+
+.alertDanger {
+    background-color: #c32e2e4f;
+    border: 1px solid #c32e2e;
+}
+
+.alertSuccess {
+    background-color: #2ec34f4f;
+    border: 1px solid #2ec34f;
+}
+
+.alertInfo {
+    background-color: #2e9ec34f;
+    border: 1px solid #2e9ec3;
 }
 
 .alertWarning {
-    background-color: #c32e2e4f;
-    border: 1px solid #c32e2e;
+    background-color: #c3b52e4f;
+    border: 1px solid #c3b52e;
 }
