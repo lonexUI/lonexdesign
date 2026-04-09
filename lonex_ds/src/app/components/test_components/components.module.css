@@ -4,6 +4,11 @@
     color: white;
     transition: .5s ease;
     border-radius: 8px;
+
+    /* default */
+    background-color: var(--box);
+    border: 1px solid var(--border);
+    padding: 6px 12px;
 }
 
 .btn.btnSm {
@@ -43,6 +48,10 @@
     padding: 15px;
     border-radius: 10px;
     transition: .5s ease;
+
+    /* default */
+    background-color: #c32e2e4f;
+    border: 1px solid #c32e2e;
 }
 
 .alertDanger {
