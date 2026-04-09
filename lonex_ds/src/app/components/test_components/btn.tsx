@@ -2,7 +2,7 @@
 
 import styles from './components.module.css';
 interface BtnProps {
-    variant?: 'primary' | 'secondary' | 'tretiary';
+    variant?: 'primary' | 'secondary' | 'tretiary' | 'test';
     size?: 'sm' | 'md' | 'lg';
     disabled?: boolean;
     rounded?: boolean;
