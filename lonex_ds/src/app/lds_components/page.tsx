@@ -5,7 +5,6 @@ import ControlsWithPreview from "./ControlsWithPreview";
 import * as Components from "../components";
 import Link from "next/link";
 import React from "react";
-
 const components: Record<string, React.ComponentType<any>> = {
     "button": Components.Btn,
     "alert": Components.Alert,
@@ -45,10 +44,15 @@ export default async function componentsLibrary({ searchParams }: { searchParams
                         <Link href="?component=btn"><li className={styles.componentItem}>Buttons</li></Link>
                         <Link href="?component=alert"><li className={styles.componentItem}>Alerts</li></Link>
                         <Link href="?component=card"><li className={styles.componentItem}>Cards</li></Link>
-                        <li className={styles.componentItem}>Navbar</li>
-                        <li className={styles.componentItem}>Header</li>
-                        <li className={styles.componentItem}>Dropdown</li>
-                        <li className={styles.componentItem}>Search</li>
+
+                        <details>
+                            <summary className={styles.componentItem}>Atoms</summary>
+                            <ul className={styles.componentList}>
+                                <li className={styles.componentItem}><a href="#">Atom Link 1</a></li>
+                                <li className={styles.componentItem}><a href="#">Atom Link 2</a></li>
+                                <li className={styles.componentItem}><a href="#">Atom Link 3</a></li>
+                            </ul>
+                        </details>
                     </ul>
                     <span className={styles.subtitle}>TOKENS</span>
                     <ul className={styles.componentList}>

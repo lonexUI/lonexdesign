@@ -26,16 +26,31 @@
     margin-bottom: 3rem;
 }
 
-.componentList li {
+.componentItem {
     list-style: none;
     padding: 10px 12px;
     display: block;
     border-radius: 8px;
 }
 
-.componentList li:hover {
+.componentItem:hover {
     background-color: hsl(0, 0%, 15%);
     cursor: pointer;
+}
+
+details summary::before {
+    content: ">";
+    display: inline-block;
+    margin-right: 5px;
+    transition: transform 0.3s;
+}
+
+details[open] summary::before {
+    transform: rotate(90deg);
+}
+
+details .componentList {
+    margin-left: 20px;
 }
 
 /* content */
