@@ -100,3 +100,20 @@
 .card .btn {
     width: fit-content;
 }
+
+.quickNote {
+    padding: 0px;
+    display: block;
+}
+
+.qnHeader {
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+    padding: 3px;
+    font-weight: 500;
+}
+
+.qnContent {
+    padding: 10px;
+    text-align: center;
+}

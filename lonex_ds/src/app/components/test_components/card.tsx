@@ -1,22 +1,30 @@
 "use client";
 import styles from './components.module.css';
 import Btn from './btn';
-import { div, image } from 'framer-motion/client';
 // import Alert from './alert';
 
 interface CardProps {
+    variant?: 'normal' | 'quick note'
     alert?: boolean;
     image?: boolean;
 }
 
-export default function Card({ alert, image }: CardProps) {
+export default function Card({ variant = 'normal', alert, image }: CardProps) {
+    if (variant === 'quick note') {
+        return <div className={`${styles.card} ${styles.quickNote}`}>
+            <div className={styles.qnHeader}>
+                Header
+            </div>
+            <div className={styles.qnContent}>
+                Lorem ipsum dolor sit amet consectetur.
+            </div>
+        </div>;
+    }
     return <div className={styles.card}>
-        {/* <div className={styles.fakeImage}></div> */}
         {image && <div className={styles.fakeImage}></div>}
         <h3>Card Title</h3>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit!</p>
-        {/* name Btn will become ldsBtn in future */}
         <Btn variant="primary" label="Click Me" />
-        {alert && <div className={styles.alertWarning + ' ' + styles.alertMini}>Dont do that!</div>}
+        {alert && <div className={`${styles.alertWarning} ${styles.alertMini}`}>Dont do that!</div>}
     </div>;
 }
