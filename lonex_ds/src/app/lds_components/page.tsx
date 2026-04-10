@@ -48,9 +48,9 @@ export default async function componentsLibrary({ searchParams }: { searchParams
                         <details>
                             <summary className={styles.componentItem}>Atoms</summary>
                             <ul className={styles.componentList}>
-                                <li className={styles.componentItem}><a href="#">Atom Link 1</a></li>
-                                <li className={styles.componentItem}><a href="#">Atom Link 2</a></li>
-                                <li className={styles.componentItem}><a href="#">Atom Link 3</a></li>
+                                <Link href="?component=btn"><li className={styles.componentItem}>Buttons</li></Link>
+                                <Link href="?component=alert"><li className={styles.componentItem}>Alerts</li></Link>
+                                <Link href="?component=card"><li className={styles.componentItem}>Cards</li></Link>
                             </ul>
                         </details>
                     </ul>
