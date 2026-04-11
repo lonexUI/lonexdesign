@@ -120,3 +120,29 @@
     display: grid;
     place-items: center;
 }
+
+/* inputs */
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.inputContainer label {
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.inputContainer input {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background-color: var(--box);
+    color: var(--foreground);
+    transition: border-color .2s;
+}
+
+.inputContainer input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
