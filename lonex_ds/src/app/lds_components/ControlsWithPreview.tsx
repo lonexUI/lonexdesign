@@ -4,6 +4,7 @@ import ClientComponent from "./ClientComponent";
 import { PropOption } from "@/lib/parseProps";
 import React from "react";
 import styles from "./componentsLibrary.module.css";
+import * as Components from "../components";
 
 interface ComponentData {
     name: string;
@@ -15,12 +16,21 @@ interface ComponentData {
 }
 
 interface previewProps {
-    Component: React.ComponentType<any>;
+    componentName: string;
     propOptions: PropOption[];
     componentData: ComponentData;
 }
 
-export default function ControlsWithPreview({ Component, propOptions, componentData }: previewProps) {
+const componentMap: Record<string, React.ComponentType<any> | undefined> = {
+    button: Components.Btn,
+    alert: Components.Alert,
+    card: Components.Card,
+    input: Components.Input,
+};
+
+export default function ControlsWithPreview({ componentName, propOptions, componentData }: previewProps) {
+    const Component = componentMap[componentName];
+
     // Initialize with defaults from propOptions
     const initializeDefaults = () => {
         const selected: Record<string, any> = {};

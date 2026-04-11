@@ -2,14 +2,8 @@ import styles from "./componentsLibrary.module.css";
 import { fetchComponent } from "@/lib/fetchComponents";
 import { parseComponentProps } from "@/lib/parseProps";
 import ControlsWithPreview from "./ControlsWithPreview";
-import * as Components from "../components";
 import Link from "next/link";
 import React from "react";
-const components: Record<string, React.ComponentType<any>> = {
-    "button": Components.Btn,
-    "alert": Components.Alert,
-    "card": Components.Card
-};
 
 export default async function componentsLibrary({ searchParams }: { searchParams: Promise<{ component?: string }> }) {
     const resolvedSearchParams = await searchParams;
@@ -33,8 +27,6 @@ export default async function componentsLibrary({ searchParams }: { searchParams
     const propOptions = parseComponentProps(componentData.props);
 
     // Get the component from the registry
-    const Component = components[componentData.name.toLowerCase()];
-
     return (
         <main>
             <div className={styles.container}>
@@ -48,9 +40,10 @@ export default async function componentsLibrary({ searchParams }: { searchParams
                         <details>
                             <summary className={styles.componentItem}>Atoms</summary>
                             <ul className={`${styles.componentList} ${styles.listInsideDropdown}`}>
-                                <Link href="?component=btn"><li className={styles.componentItem}>Buttons</li></Link>
+                                <Link href="?component=button"><li className={styles.componentItem}>Buttons</li></Link>
                                 <Link href="?component=alert"><li className={styles.componentItem}>Alerts</li></Link>
                                 <Link href="?component=card"><li className={styles.componentItem}>Cards</li></Link>
+                                <Link href="?component=input"><li className={styles.componentItem}>Input</li></Link>
                             </ul>
                         </details>
                         <details>
@@ -69,7 +62,7 @@ export default async function componentsLibrary({ searchParams }: { searchParams
                         <li className={styles.componentItem}>Motion</li>
                     </ul>
                 </aside>
-                <ControlsWithPreview Component={Component} propOptions={propOptions} componentData={componentData} />
+                <ControlsWithPreview componentName={componentName} propOptions={propOptions} componentData={componentData} />
             </div>
         </main>
     );
