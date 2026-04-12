@@ -168,10 +168,10 @@ details .componentList {
 
 .segmentedControl {
     display: flex;
-    background: #111;
+    background: hsl(0, 0%, 7%);
     padding: 3px;
     border-radius: 8px;
-    border: 1px solid #262626;
+    border: 1px solid var(--border);
     position: relative;
 }
 
