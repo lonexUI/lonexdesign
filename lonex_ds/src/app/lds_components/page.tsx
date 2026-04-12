@@ -41,6 +41,7 @@ export default async function componentsLibrary({ searchParams }: { searchParams
                                 <Link href="?component=alert"><li className={styles.componentItem}>Alerts</li></Link>
                                 <Link href="?component=card"><li className={styles.componentItem}>Cards</li></Link>
                                 <Link href="?component=input"><li className={styles.componentItem}>Input</li></Link>
+                                <Link href="?component=links"><li className={styles.componentItem}>Links</li></Link>
                             </ul>
                         </details>
                         <details>
@@ -49,6 +50,8 @@ export default async function componentsLibrary({ searchParams }: { searchParams
                                 <Link href="#"><li className={styles.componentItem}>Searchbar</li></Link>
                                 <Link href="#"><li className={styles.componentItem}>Form</li></Link>
                                 <Link href="#"><li className={styles.componentItem}>Dropdowns</li></Link>
+                                <Link href="#"><li className={styles.componentItem}>Segmented Controls X</li></Link>
+                                <Link href="#"><li className={styles.componentItem}>Modals X</li></Link>
                             </ul>
                         </details>
                     </ul>

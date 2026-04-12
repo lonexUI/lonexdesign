@@ -26,6 +26,7 @@ const componentMap: Record<string, React.ComponentType<any> | undefined> = {
     alert: Components.Alert,
     card: Components.Card,
     input: Components.Input,
+    links: Components.Links,
 };
 
 export default function ControlsWithPreview({ componentName, propOptions, componentData }: previewProps) {
