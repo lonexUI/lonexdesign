@@ -8,7 +8,7 @@ export interface ComponentData {
 }
 
 export async function fetchComponent(componentName: string): Promise<ComponentData> {
-    const url = `https://lonexui.github.io/lonex-content/content/components/${componentName}.json`;
+    const url = `https://lonexui.github.io/son-content/components/${componentName}.json`;
 
     try {
         const response = await fetch(url, {
