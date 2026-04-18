@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div>
       <div className="hero">
-        <h1 className="hero_heading">lonex_ds</h1>
+        <h1 className="hero_heading">son-ds</h1>
         <p>A modern design system for building beautiful interfaces.</p>
         <div className="cta-row">
           <Link href="#get-started" className="btn">
@@ -51,7 +51,7 @@ export default function Home() {
             </div>
           </div>
           <div className="decorative-code">
-            import Lonex from '@lonex_ds';
+            import Son from '@son-ds/core';
           </div>
         </div>
 
@@ -84,7 +84,7 @@ export default function Home() {
         <div className="terminal-body">
           <code>
             <span style={{ color: '#71717a' }}>$</span>
-            <span className="command">npm install</span> lonex-ds
+            <span className="command">npm install</span> @son-ds/core
           </code>
           <Link href="#" className="copy-btn">
             Copy
