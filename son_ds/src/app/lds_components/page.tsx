@@ -1,12 +1,15 @@
 import styles from "./componentsLibrary.module.css";
 import { fetchComponent } from "@/lib/fetchComponents";
+import { fetchToken, TokenData } from "@/lib/fetchTokens";
 import { parseComponentProps } from "@/lib/parseProps";
 import ControlsWithPreview from "./ControlsWithPreview";
+import TokenTables from "./TokenTables";
 import Link from "next/link";
 
-export default async function componentsLibrary({ searchParams }: { searchParams: Promise<{ component?: string }> }) {
+export default async function componentsLibrary({ searchParams }: { searchParams: Promise<{ component?: string; token?: string }> }) {
     const resolvedSearchParams = await searchParams;
     const componentName = resolvedSearchParams?.component || "alert";
+    const tokenName = resolvedSearchParams?.token;
 
     let componentData;
     try {
@@ -25,7 +28,17 @@ export default async function componentsLibrary({ searchParams }: { searchParams
 
     const propOptions = parseComponentProps(componentData.props);
 
-    // Get the component from the registry
+    let tokenData: TokenData | null = null;
+    let tokenError: string | null = null;
+
+    if (tokenName) {
+        try {
+            tokenData = await fetchToken(tokenName);
+        } catch (error) {
+            tokenError = `Unable to load token set: ${tokenName}`;
+        }
+    }
+
     return (
         <main>
             <div className={styles.container}>
@@ -57,12 +70,23 @@ export default async function componentsLibrary({ searchParams }: { searchParams
                     </ul>
                     <span className={styles.subtitle}>TOKENS</span>
                     <ul className={styles.componentList}>
-                        <li className={styles.componentItem}>Colors</li>
-                        <li className={styles.componentItem}>Typography</li>
-                        <li className={styles.componentItem}>Motion</li>
+                        <Link href="?token=colors"><li className={styles.componentItem}>Colors</li></Link>
+                        <Link href="?token=typography"><li className={styles.componentItem}>Typography</li></Link>
+                        <Link href="?token=motion"><li className={styles.componentItem}>Motion</li></Link>
                     </ul>
                 </aside>
-                <ControlsWithPreview componentName={componentName} propOptions={propOptions} componentData={componentData} />
+                <div className={styles.mainArea}>
+                    <ControlsWithPreview componentName={componentName} propOptions={propOptions} componentData={componentData} />
+
+
+                    {tokenError ? (
+                        <div className={styles.tokenError}>{tokenError}</div>
+                    ) : tokenData ? (
+                        <TokenTables tokenData={tokenData} />
+                    ) : (
+                        <div className={styles.tokenEmpty}>Select a token card from the TOKENS sidebar to load a token table.</div>
+                    )}
+                </div>
             </div>
         </main>
     );
