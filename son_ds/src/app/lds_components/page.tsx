@@ -78,11 +78,11 @@ export default async function componentsLibrary({ searchParams }: { searchParams
                 <div className={styles.mainArea}>
                     <ControlsWithPreview componentName={componentName} propOptions={propOptions} componentData={componentData} />
 
-                    {tokenError ? (
+                    {/* {tokenError ? (
                         <div className={styles.tokenError}>{tokenError}</div>
                     ) : tokenData ? (
                         <TokenTables tokenData={tokenData} />
-                    ) : null}
+                    ) : null} */}
                 </div>
             </div>
         </main>
