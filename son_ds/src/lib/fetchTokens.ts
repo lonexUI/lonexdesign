@@ -15,7 +15,7 @@ export interface TokenData {
 }
 
 export async function fetchToken(tokenName: string): Promise<TokenData> {
-    const url = `https://raw.githubusercontent.com/sonDesignSystem/son-content/main/content/tokens/${tokenName}.json`;
+    const url = `https://sondesignsystem.github.io/son-content/content/tokens/${tokenName}.json`;
 
     try {
         const response = await fetch(url, {
