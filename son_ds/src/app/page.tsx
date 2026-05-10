@@ -2,8 +2,6 @@ import ThemeToggle from "./components/theme/themeBtn";
 import Link from "next/link";
 // tersting components in ui
 import Btn from "./components/test_components/btn";
-import { SDSButton } from "@son-ds/react";
-import { SDSAlert } from "@son-ds/react";
 export default function Home() {
   return (
     <div>
@@ -11,15 +9,12 @@ export default function Home() {
         <h1 className="hero_heading">son-ds</h1>
         <p>A modern design system for building beautiful interfaces.</p>
         <div className="cta-row">
-          {/* <Link href="#get-started" className="btn">
+          <Link href="#get-started" className="btn">
             Get Started
           </Link>
           <Link href="/lds_components" className="btn btn-secondary">
             View Components
-          </Link> */}
-          <SDSButton variant="primary" size="md">Get started</SDSButton>
-          <SDSButton variant="secondary" size="md">Docs</SDSButton>
-          <SDSButton variant="outline" size="md">View Components</SDSButton>
+          </Link>
         </div>
       </div>
       <div className="bento-container">

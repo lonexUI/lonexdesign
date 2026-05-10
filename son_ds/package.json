@@ -9,7 +9,6 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@son-ds/react": "^1.1.5",
     "css.gg": "^2.1.4",
     "framer-motion": "^12.38.0",
     "next": "16.2.1",
