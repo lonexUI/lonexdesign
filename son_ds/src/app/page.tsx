@@ -18,16 +18,17 @@ export default function Home() {
         </div>
       </div>
       <div className="bento-container">
-
         <div className="bento-tile tile-main has-glow glow-blue">
           <div className="tile-content">
             <div>
               <h3>Ultra Lightweight</h3>
-              <p>Optimized for Core Web Vitals. No unnecessary bloat or heavy runtimes; just pure, high-performance CSS.</p>
+              <p>
+                Optimized for Core Web Vitals. No unnecessary bloat or heavy
+                runtimes; just pure, high-performance CSS.
+              </p>
             </div>
 
             <div className="stat-container">
-              <div className="stat-value">1.2<span className="stat-unit">kb</span></div>
               <div className="visual-chart">
                 <div className="bar bar-1"></div>
                 <div className="bar bar-2"></div>
@@ -43,11 +44,19 @@ export default function Home() {
           <div className="tile-content">
             <div>
               <h3>Built for Modernity</h3>
-              <p>Seamlessly integrates with your existing framework of choice.</p>
+              <p>
+                Seamlessly integrates with your existing framework of choice.
+              </p>
               <div className="pills-row">
-                <span className="pill-small pill-blue"><span className="dot"></span> React</span>
-                <span className="pill-small pill-green"><span className="dot"></span> Vue</span>
-                <span className="pill-small pill-yellow"><span className="dot"></span> Svelte</span>
+                <span className="pill-small pill-blue">
+                  <span className="dot"></span> React
+                </span>
+                <span className="pill-small pill-green">
+                  <span className="dot"></span> Vue
+                </span>
+                <span className="pill-small pill-yellow">
+                  <span className="dot"></span> Svelte
+                </span>
               </div>
             </div>
           </div>
@@ -74,7 +83,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-
       </div>
       <div className="terminal">
         <div className="terminal-header">
@@ -84,7 +92,7 @@ export default function Home() {
         </div>
         <div className="terminal-body">
           <code>
-            <span style={{ color: '#71717a' }}>$</span>
+            <span style={{ color: "#71717a" }}>$</span>
             <span className="command">npm install</span> @son-ds/react
           </code>
           <Link href="#" className="copy-btn">

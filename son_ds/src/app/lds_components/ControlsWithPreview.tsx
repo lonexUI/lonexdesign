@@ -21,7 +21,7 @@ interface previewProps {
     componentData: ComponentData;
 }
 
-const componentMap: Record<string, React.ComponentType<any> | undefined> = {
+const componentMap: Record<string, React.ComponentType<Record<string, string | boolean>> | undefined> = {
     button: Components.Btn,
     alert: Components.Alert,
     card: Components.Card,
@@ -32,15 +32,14 @@ const componentMap: Record<string, React.ComponentType<any> | undefined> = {
 export default function ControlsWithPreview({ componentName, propOptions, componentData }: previewProps) {
     const Component = componentMap[componentName];
 
-    // Initialize with defaults from propOptions
-    const initializeDefaults = () => {
-        const selected: Record<string, any> = {};
+    // Memoize defaults to avoid recalculating on every render
+    const defaults = React.useMemo(() => {
+        const selected: Record<string, string> = {};
         const toggled: Record<string, boolean> = {};
 
         propOptions.forEach((option) => {
             if (option.type === "select" && option.default) {
-                selected[option.name] = option.default;
-                console.log(`Setting default for ${option.name}: ${option.default}`);
+                selected[option.name] = option.default as string;
             }
             if (option.type === "toggle" && typeof option.default === "boolean") {
                 toggled[option.name] = option.default;
@@ -48,17 +47,16 @@ export default function ControlsWithPreview({ componentName, propOptions, compon
         });
 
         return { selected, toggled };
-    };
+    }, [propOptions]);
 
-    const defaults = initializeDefaults();
-    const [selectedValues, setSelectedValues] = React.useState<Record<string, any>>(defaults.selected);
+    const [selectedValues, setSelectedValues] = React.useState<Record<string, string>>(defaults.selected);
     const [toggledProps, setToggledProps] = React.useState<Record<string, boolean>>(defaults.toggled);
 
-    // Reset state when component changes (propOptions changes)
+    // Reset state when component or propOptions change
     React.useEffect(() => {
         setSelectedValues(defaults.selected);
         setToggledProps(defaults.toggled);
-    }, [componentData.name]);
+    }, [defaults]);
 
     return (
         <>
