@@ -6,85 +6,121 @@ import ControlsWithPreview from "./ControlsWithPreview";
 import TokenTables from "./TokenTables";
 import Link from "next/link";
 
-export default async function componentsLibrary({ searchParams }: { searchParams: Promise<{ component?: string; token?: string }> }) {
-    const resolvedSearchParams = await searchParams;
-    const componentName = resolvedSearchParams?.component || "alert";
-    const tokenName = resolvedSearchParams?.token;
+export default async function componentsLibrary({
+  searchParams,
+}: {
+  searchParams: Promise<{ component?: string; token?: string }>;
+}) {
+  const resolvedSearchParams = await searchParams;
+  const componentName = resolvedSearchParams?.component || "alert";
+  const tokenName = resolvedSearchParams?.token;
 
-    let componentData;
+  let componentData;
+  try {
+    componentData = await fetchComponent(componentName);
+  } catch (error) {
+    // Fallback data if fetch fails
+    componentData = {
+      name: "Unknown",
+      slug: componentName,
+      category: "Unknown",
+      description: "Component data not found in CMS.",
+      code: "// No code available",
+      props: "{}",
+    };
+  }
+
+  const propOptions = parseComponentProps(componentData.props);
+
+  let tokenData: TokenData | null = null;
+  let tokenError: string | null = null;
+
+  if (tokenName) {
     try {
-        componentData = await fetchComponent(componentName);
+      tokenData = await fetchToken(tokenName);
     } catch (error) {
-        // Fallback data if fetch fails
-        componentData = {
-            name: "Unknown",
-            slug: componentName,
-            category: "Unknown",
-            description: "Component data not found in CMS.",
-            code: "// No code available",
-            props: "{}"
-        };
+      tokenError = `Unable to load token set: ${tokenName}`;
     }
+  }
 
-    const propOptions = parseComponentProps(componentData.props);
+  return (
+    <main>
+      <div className={styles.container}>
+        <aside className={styles.sidebar}>
+          <span className={styles.subtitle}>COMPONENTS</span>
+          <ul className={styles.componentList}>
+            <details>
+              <summary className={styles.componentItem}>Atoms</summary>
+              <ul
+                className={`${styles.componentList} ${styles.listInsideDropdown}`}
+              >
+                <Link href="?component=button">
+                  <li className={styles.componentItem}>Buttons</li>
+                </Link>
+                <Link href="?component=alert">
+                  <li className={styles.componentItem}>Alerts</li>
+                </Link>
+                <Link href="?component=card">
+                  <li className={styles.componentItem}>Cards</li>
+                </Link>
+                <Link href="?component=input">
+                  <li className={styles.componentItem}>Input</li>
+                </Link>
+                <Link href="?component=links">
+                  <li className={styles.componentItem}>Links</li>
+                </Link>
+              </ul>
+            </details>
+            <details>
+              <summary className={styles.componentItem}>Molecules</summary>
+              <ul
+                className={`${styles.componentList} ${styles.listInsideDropdown}`}
+              >
+                <Link href="#">
+                  <li className={styles.componentItem}>Searchbar</li>
+                </Link>
+                <Link href="#">
+                  <li className={styles.componentItem}>Form</li>
+                </Link>
+                <Link href="#">
+                  <li className={styles.componentItem}>Dropdowns</li>
+                </Link>
+                <Link href="#">
+                  <li className={styles.componentItem}>Segmented Controls X</li>
+                </Link>
+                <Link href="#">
+                  <li className={styles.componentItem}>Modals X</li>
+                </Link>
+              </ul>
+            </details>
+          </ul>
+          <span className={styles.subtitle}>TOKENS</span>
+          <ul className={styles.componentList}>
+            <Link href="?token=colors">
+              <li className={styles.componentItem}>Colors</li>
+            </Link>
+            <Link href="?token=typography">
+              <li className={styles.componentItem}>Typography</li>
+            </Link>
+            <Link href="?token=motion">
+              <li className={styles.componentItem}>Motion</li>
+            </Link>
+          </ul>
+        </aside>
+        <div className={styles.mainArea}>
+          <ControlsWithPreview
+            componentName={componentName}
+            propOptions={propOptions}
+            componentData={componentData}
+          />
 
-    let tokenData: TokenData | null = null;
-    let tokenError: string | null = null;
-
-    if (tokenName) {
-        try {
-            tokenData = await fetchToken(tokenName);
-        } catch (error) {
-            tokenError = `Unable to load token set: ${tokenName}`;
-        }
-    }
-
-    return (
-        <main>
-            <div className={styles.container}>
-                <aside className={styles.sidebar}>
-                    <span className={styles.subtitle}>COMPONENTS</span>
-                    <ul className={styles.componentList}>
-
-
-                        <details>
-                            <summary className={styles.componentItem}>Atoms</summary>
-                            <ul className={`${styles.componentList} ${styles.listInsideDropdown}`}>
-                                <Link href="?component=button"><li className={styles.componentItem}>Buttons</li></Link>
-                                <Link href="?component=alert"><li className={styles.componentItem}>Alerts</li></Link>
-                                <Link href="?component=card"><li className={styles.componentItem}>Cards</li></Link>
-                                <Link href="?component=input"><li className={styles.componentItem}>Input</li></Link>
-                                <Link href="?component=links"><li className={styles.componentItem}>Links</li></Link>
-                            </ul>
-                        </details>
-                        <details>
-                            <summary className={styles.componentItem}>Molecules</summary>
-                            <ul className={`${styles.componentList} ${styles.listInsideDropdown}`}>
-                                <Link href="#"><li className={styles.componentItem}>Searchbar</li></Link>
-                                <Link href="#"><li className={styles.componentItem}>Form</li></Link>
-                                <Link href="#"><li className={styles.componentItem}>Dropdowns</li></Link>
-                                <Link href="#"><li className={styles.componentItem}>Segmented Controls X</li></Link>
-                                <Link href="#"><li className={styles.componentItem}>Modals X</li></Link>
-                            </ul>
-                        </details>
-                    </ul>
-                    <span className={styles.subtitle}>TOKENS</span>
-                    <ul className={styles.componentList}>
-                        <Link href="?token=colors"><li className={styles.componentItem}>Colors</li></Link>
-                        <Link href="?token=typography"><li className={styles.componentItem}>Typography</li></Link>
-                        <Link href="?token=motion"><li className={styles.componentItem}>Motion</li></Link>
-                    </ul>
-                </aside>
-                <div className={styles.mainArea}>
-                    <ControlsWithPreview componentName={componentName} propOptions={propOptions} componentData={componentData} />
-
-                    {/* {tokenError ? (
-                        <div className={styles.tokenError}>{tokenError}</div>
-                    ) : tokenData ? (
-                        <TokenTables tokenData={tokenData} />
-                    ) : null} */}
-                </div>
-            </div>
-        </main>
-    );
+          {tokenError ? (
+            <div className={styles.tokenError}>{tokenError}</div>
+          ) : tokenData ? (
+            <TokenTables tokenData={tokenData} />
+          ) : null}
+        </div>
+      </div>
+    </main>
+  );
 }
