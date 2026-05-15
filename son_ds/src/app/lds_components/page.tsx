@@ -12,25 +12,28 @@ export default async function componentsLibrary({
   searchParams: Promise<{ component?: string; token?: string }>;
 }) {
   const resolvedSearchParams = await searchParams;
-  const componentName = resolvedSearchParams?.component || "alert";
   const tokenName = resolvedSearchParams?.token;
+  const componentName =
+    resolvedSearchParams?.component || (tokenName ? undefined : "alert");
 
-  let componentData;
-  try {
-    componentData = await fetchComponent(componentName);
-  } catch (error) {
-    // Fallback data if fetch fails
-    componentData = {
-      name: "Unknown",
-      slug: componentName,
-      category: "Unknown",
-      description: "Component data not found in CMS.",
-      code: "// No code available",
-      props: "{}",
-    };
+  let componentData = null;
+  let propOptions = [];
+  if (componentName) {
+    try {
+      componentData = await fetchComponent(componentName);
+    } catch (error) {
+      // Fallback data if fetch fails
+      componentData = {
+        name: "Unknown",
+        slug: componentName,
+        category: "Unknown",
+        description: "Component data not found in CMS.",
+        code: "// No code available",
+        props: "{}",
+      };
+    }
+    propOptions = parseComponentProps(componentData.props);
   }
-
-  const propOptions = parseComponentProps(componentData.props);
 
   let tokenData: TokenData | null = null;
   let tokenError: string | null = null;
@@ -49,7 +52,7 @@ export default async function componentsLibrary({
         <aside className={styles.sidebar}>
           <span className={styles.subtitle}>COMPONENTS</span>
           <ul className={styles.componentList}>
-            <details>
+            <details open={!tokenName}>
               <summary className={styles.componentItem}>Atoms</summary>
               <ul
                 className={`${styles.componentList} ${styles.listInsideDropdown}`}
@@ -108,16 +111,18 @@ export default async function componentsLibrary({
           </ul>
         </aside>
         <div className={styles.mainArea}>
-          <ControlsWithPreview
-            componentName={componentName}
-            propOptions={propOptions}
-            componentData={componentData}
-          />
-
-          {tokenError ? (
-            <div className={styles.tokenError}>{tokenError}</div>
-          ) : tokenData ? (
-            <TokenTables tokenData={tokenData} />
+          {tokenName ? (
+            tokenError ? (
+              <div className={styles.tokenError}>{tokenError}</div>
+            ) : tokenData ? (
+              <TokenTables tokenData={tokenData} />
+            ) : null
+          ) : componentData ? (
+            <ControlsWithPreview
+              componentName={componentName!}
+              propOptions={propOptions}
+              componentData={componentData}
+            />
           ) : null}
         </div>
       </div>
