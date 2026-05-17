@@ -1,7 +1,7 @@
 import styles from "./componentsLibrary.module.css";
-import { fetchComponent } from "@/lib/fetchComponents";
+import { fetchComponent, ComponentData } from "@/lib/fetchComponents";
 import { fetchToken, TokenData } from "@/lib/fetchTokens";
-import { parseComponentProps } from "@/lib/parseProps";
+import { parseComponentProps, PropOption } from "@/lib/parseProps";
 import ControlsWithPreview from "./ControlsWithPreview";
 import TokenTables from "./TokenTables";
 import Link from "next/link";
@@ -16,8 +16,8 @@ export default async function componentsLibrary({
   const componentName =
     resolvedSearchParams?.component || (tokenName ? undefined : "alert");
 
-  let componentData = null;
-  let propOptions = [];
+  let componentData: ComponentData | null = null;
+  let propOptions: PropOption[] = [];
   if (componentName) {
     try {
       componentData = await fetchComponent(componentName);
