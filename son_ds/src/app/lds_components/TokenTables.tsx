@@ -12,7 +12,7 @@ export default function TokenTables({ tokenData }: TokenTablesProps) {
         <h2>{tokenData.name}</h2>
         <p>Loaded token tables from the shared content repo.</p>
       </div>
-      <div className={styles.tokenGrid}>
+      <div className={styles.tokenFlex}>
         {tokenData.tables.map((table) => (
           <div key={table.name} className={styles.tokenTableCard}>
             <h3>{table.name}</h3>

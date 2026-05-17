@@ -265,9 +265,11 @@ details .componentList {
     border: 1px solid var(--border);
     border-radius: 24px;
     padding: 28px;
+    margin: 1rem 2rem;
     display: flex;
     flex-direction: column;
     gap: 24px;
+    width: 75%;
 }
 
 .tokenHeader h2 {
@@ -279,10 +281,10 @@ details .componentList {
     color: var(--text-muted);
 }
 
-.tokenGrid {
-    display: grid;
+.tokenFlex {
+    display: flex;
+    flex-direction: column;
     gap: 20px;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 
 .tokenTableCard {
@@ -290,6 +292,7 @@ details .componentList {
     border: 1px solid var(--border);
     border-radius: 18px;
     padding: 18px;
+    width: fit-content;
 }
 
 .tokenTableCard h3 {
