@@ -161,14 +161,14 @@
 
 /* links */
 .link {
-    color: white;
     font-weight: 500;
+    transition: all 0.2s;
 }
 
 .linkHover:hover {
     text-decoration: underline;
 }
 
-.link-primary:hover {
+.linkPrimary:hover {
     color: var(--primary);
 }

@@ -1,5 +1,6 @@
 import ThemeToggle from "./components/theme/themeBtn";
 import Link from "next/link";
+import TerminalCopy from "./components/terminalCopy";
 // tersting components in ui
 import Btn from "./components/test_components/btn";
 export default function Home() {
@@ -95,9 +96,7 @@ export default function Home() {
             <span style={{ color: "#71717a" }}>$</span>
             <span className="command">npm install</span> @son-ds/react
           </code>
-          <Link href="#" className="copy-btn">
-            Copy
-          </Link>
+          <TerminalCopy command="npm install @son-ds/react" />
         </div>
       </div>
 

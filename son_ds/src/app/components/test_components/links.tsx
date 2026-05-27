@@ -2,12 +2,18 @@ import Link from "next/link";
 import styles from "./components.module.css";
 
 interface LinksProps {
-    colorHoverState?: boolean;
+  color?: boolean;
+  underline?: boolean;
 }
 
-export default function Links({ colorHoverState }: LinksProps) {
-    const linkClassName = colorHoverState ? styles.linkHover : styles.link;
-    return <div>
-        <Link className={`${linkClassName}`} href="#">This is a Link!</Link>
+export default function Links({ color, underline }: LinksProps) {
+  const linkClassName = `${styles.link} ${color ? styles.linkPrimary : ""} ${underline ? styles.linkHover : ""}`;
+
+  return (
+    <div>
+      <Link className={linkClassName.trim()} href="#">
+        This is a Link!
+      </Link>
     </div>
+  );
 }
