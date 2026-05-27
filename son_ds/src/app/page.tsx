@@ -61,9 +61,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="decorative-code">
-            import SDSButton from '@son-ds/react';
-          </div>
         </div>
 
         <div className="bento-tile">
