@@ -15,6 +15,9 @@
     font-weight: 500;
     font-family: var(--font-dm-mono);
     color: var(--foreground);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .nav .menu {

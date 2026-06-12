@@ -6,7 +6,7 @@ const Nav: React.FC = () => (
   <nav className={styles.nav}>
     <div className={styles.logo}>
       <Image src="/logo-border.svg" width={31} height={31} alt="Son Logo" />
-      son-ds
+      <span>son-ds</span>
     </div>
     <ul className={styles.menu}>
       <li>
